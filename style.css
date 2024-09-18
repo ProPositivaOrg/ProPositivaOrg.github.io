@@ -22,5 +22,6 @@ img {
   background-size: cover;
   width: 646px;
   height: 370px;
+  align-items: center;
 }
 }
