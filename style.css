@@ -1,5 +1,5 @@
 body {
-  background-color: #f2f2f2;
+  background-color: #404040;
 }
 
 .container {
@@ -10,11 +10,11 @@ body {
 
 h1 {
   font-size: 36px;
-  color: #00698f;
+  color: #ecb306;
 }
 
 p {
   font-size: 18px;
-  color: #666;
+  color: #ffffff;
 }
 }
