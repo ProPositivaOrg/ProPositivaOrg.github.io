@@ -1,0 +1,20 @@
+body {
+  background-color: #f2f2f2;
+}
+
+.container {
+  max-width: 400px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+h1 {
+  font-size: 36px;
+  color: #00698f;
+}
+
+p {
+  font-size: 18px;
+  color: #666;
+}
+}
