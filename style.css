@@ -17,4 +17,9 @@ p {
   font-size: 18px;
   color: #ffffff;
 }
+img {
+  background-size: cover;
+  width: 646px;
+  height: 370px;
+}
 }
