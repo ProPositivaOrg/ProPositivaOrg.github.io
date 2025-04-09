@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASOProPositiva | Turismo Sostenible en Costa Rica</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #2F4C39;
@@ -11,19 +12,20 @@
             --accent: #D34F48;
             --text: #333333;
             --light-bg: #F8F5F0;
+            --dark-green: #1E3A2A;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
         }
 
         body {
             line-height: 1.6;
             color: var(--text);
-            background-color: var(--light-bg);
+            background-color: white;
         }
 
         /* Language Toggle */
@@ -33,31 +35,60 @@
             right: 2rem;
             display: flex;
             gap: 0.5rem;
+            z-index: 101;
         }
 
         .language-btn {
             background: none;
             border: none;
-            color: var(--primary);
+            color: white;
             font-weight: 500;
             cursor: pointer;
             padding: 0.3rem 0.5rem;
             border-radius: 4px;
+            font-size: 0.9rem;
         }
 
         .language-btn.active {
-            background: var(--primary);
-            color: white;
+            background: rgba(255,255,255,0.2);
         }
 
         /* Header */
         header {
-            background: white;
+            background: transparent;
             padding: 1rem 2rem;
-            position: sticky;
+            position: absolute;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            background: white;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+        }
+
+        header.scrolled .logo img {
+            filter: brightness(0.8);
+        }
+
+        header.scrolled .nav-links a {
+            color: var(--primary);
+        }
+
+        header.scrolled .language-btn {
+            color: var(--primary);
+        }
+
+        header.scrolled .language-btn.active {
+            background: rgba(47, 76, 57, 0.1);
+        }
+
+        header.scrolled .mobile-menu-btn {
+            color: var(--primary);
         }
 
         nav {
@@ -76,6 +107,7 @@
         .logo img {
             height: 100%;
             width: auto;
+            transition: all 0.3s ease;
         }
 
         .nav-links {
@@ -84,7 +116,7 @@
         }
 
         .nav-links a {
-            color: var(--primary);
+            color: white;
             text-decoration: none;
             font-weight: 500;
             padding: 0.5rem 0;
@@ -98,31 +130,34 @@
 
         /* Hero Section */
         .hero {
-            height: 90vh;
-            background: linear-gradient(rgba(47, 76, 57, 0.7), rgba(47, 76, 57, 0.7)), 
-                        url('Assets/Images/costarica-nature.jpg') center/cover;
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), 
+                        url('Assets/Images/hero-bg.jpg') center/cover;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
             padding: 2rem;
+            position: relative;
         }
 
         .hero-content {
             max-width: 800px;
+            margin-top: -60px;
         }
 
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1.5rem;
-            text-transform: uppercase;
             letter-spacing: 1px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
 
         .hero p {
             font-size: 1.2rem;
             margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
         .btn {
@@ -131,14 +166,49 @@
             background: var(--accent);
             color: white;
             text-decoration: none;
-            border-radius: 4px;
+            border-radius: 30px;
             font-weight: 600;
             transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
         }
 
         .btn:hover {
             background: #b93c35;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
         }
 
         /* Sections */
@@ -168,6 +238,26 @@
             background: var(--accent);
         }
 
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
         /* Stats Grid */
         .stats-grid {
             display: grid;
@@ -183,6 +273,7 @@
             border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: transform 0.3s ease;
+            border-top: 4px solid var(--accent);
         }
 
         .stat-card:hover {
@@ -208,6 +299,7 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: all 0.3s ease;
+            position: relative;
         }
 
         .program-card:hover {
@@ -230,11 +322,37 @@
             margin-bottom: 0.5rem;
         }
 
+        .program-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
         /* Donation Section */
+        .donation-section {
+            background: linear-gradient(rgba(47, 76, 57, 0.9), rgba(47, 76, 57, 0.9)), 
+                        url('Assets/Images/donate-bg.jpg') center/cover;
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .donation-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
         .plans {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
+            margin-top: 3rem;
         }
 
         .plan-card {
@@ -244,6 +362,7 @@
             text-align: center;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             border-top: 4px solid var(--accent);
+            color: var(--text);
         }
 
         .plan-card h3 {
@@ -266,7 +385,52 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
+        /* Testimonials */
+        .testimonials {
+            background: var(--light-bg);
+            padding: 4rem 0;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .testimonial-card:before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 4rem;
+            color: rgba(47, 76, 57, 0.1);
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .testimonial-content {
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
         /* News Section */
+        .news-section {
+            background: white;
+        }
+
         .news-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -278,6 +442,12 @@
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
         .news-card img {
@@ -307,6 +477,7 @@
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
+            border: 1px solid rgba(0,0,0,0.1);
         }
 
         .subscription-box h3 {
@@ -344,17 +515,49 @@
             opacity: 0.7;
         }
 
+        /* Gallery Section */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            height: 200px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
         /* Footer */
         footer {
-            background: var(--primary);
+            background: var(--dark-green);
             color: white;
-            padding: 3rem 2rem;
-            text-align: center;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
         }
 
         .footer-logo {
             height: 70px;
-            margin: 0 auto 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
         .footer-logo img {
@@ -362,16 +565,84 @@
             width: auto;
         }
 
-        .footer-links {
+        .footer-about p {
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .social-links {
             display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-links h3, .footer-contact h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-links h3:after, .footer-contact h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
         }
 
         .footer-links a {
             color: white;
             text-decoration: none;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .contact-item i {
+            color: var(--accent);
+            margin-top: 3px;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
         }
 
         .footer-language {
@@ -385,14 +656,16 @@
             cursor: pointer;
             margin: 0 0.5rem;
             font-weight: 500;
+            opacity: 0.7;
         }
 
         .footer-language button.active {
+            opacity: 1;
             text-decoration: underline;
         }
 
         .copyright {
-            opacity: 0.8;
+            opacity: 0.7;
             font-size: 0.9rem;
         }
 
@@ -401,12 +674,23 @@
             display: none;
             background: none;
             border: none;
-            color: var(--primary);
+            color: white;
             font-size: 1.5rem;
             cursor: pointer;
+            z-index: 102;
         }
 
         /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                order: -1;
+            }
+        }
+
         @media (max-width: 768px) {
             .language-toggle {
                 position: static;
@@ -420,15 +704,17 @@
             
             .nav-links {
                 display: none;
-                position: absolute;
-                top: 80px;
+                position: fixed;
+                top: 0;
                 left: 0;
                 width: 100%;
-                background: white;
+                height: 100vh;
+                background: var(--dark-green);
                 flex-direction: column;
                 align-items: center;
-                padding: 1rem 0;
-                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                justify-content: center;
+                padding: 2rem;
+                z-index: 99;
             }
             
             .nav-links.active {
@@ -443,9 +729,9 @@
                 padding: 3rem 1.5rem;
             }
             
-            .footer-links {
-                flex-direction: column;
-                gap: 1rem;
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 1rem;
             }
             
             .subscription-form {
@@ -456,10 +742,25 @@
                 width: 100%;
             }
         }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <header>
+    <!-- Header -->
+    <header id="header">
         <nav>
             <div class="logo">
                 <img src="Assets/Logos/Asopropositiva 2025 logotipo.png" alt="ASOProPositiva">
@@ -475,10 +776,12 @@
                 <a href="#impact" data-es="Impacto" data-en="Impact">Impacto</a>
                 <a href="#donate" data-es="Donar" data-en="Donate">Donar</a>
                 <a href="#news" data-es="Noticias" data-en="News">Noticias</a>
+                <a href="#contact" data-es="Contacto" data-en="Contact">Contacto</a>
             </div>
         </nav>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <h1 data-es="Turismo Sostenible en Costa Rica" data-en="Sustainable Tourism in Costa Rica">Turismo Sostenible en Costa Rica</h1>
@@ -486,17 +789,34 @@
                data-en="Discover the beauty of our country in an accessible and responsible way">
                Descubre la belleza de nuestro país de manera accesible y responsable
             </p>
-            <a href="#programs" class="btn" data-es="Ver Programas" data-en="View Programs">Ver Programas</a>
+            <div class="hero-buttons">
+                <a href="#programs" class="btn" data-es="Ver Programas" data-en="View Programs">Ver Programas</a>
+                <a href="#about" class="btn btn-outline" data-es="Conócenos" data-en="About Us">Conócenos</a>
+            </div>
+        </div>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
         </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="section">
         <h2 class="section-title" data-es="Nuestra Misión" data-en="Our Mission">Nuestra Misión</h2>
-        <p data-es="Promovemos el desarrollo sostenible a través del turismo comunitario, conectando a los costarricenses con la belleza de su país y compartiendo experiencias auténticas con visitantes internacionales."
-           data-en="We promote sustainable development through community tourism, connecting Costa Ricans with the beauty of their country and sharing authentic experiences with international visitors.">
-           Promovemos el desarrollo sostenible a través del turismo comunitario, conectando a los costarricenses con la belleza de su país y compartiendo experiencias auténticas con visitantes internacionales.
-        </p>
+        <div class="about-content">
+            <div class="about-text">
+                <p data-es="ASOProPositiva es una asociación dedicada al desarrollo sostenible a través del turismo comunitario, conectando a los costarricenses con la belleza de su país y compartiendo experiencias auténticas con visitantes internacionales."
+                   data-en="ASOProPositiva is an association dedicated to sustainable development through community tourism, connecting Costa Ricans with the beauty of their country and sharing authentic experiences with international visitors.">
+                   ASOProPositiva es una asociación dedicada al desarrollo sostenible a través del turismo comunitario, conectando a los costarricenses con la belleza de su país y compartiendo experiencias auténticas con visitantes internacionales.
+                </p>
+                <p data-es="Nuestro enfoque en el turismo sostenible y accesible permite a las comunidades locales prosperar mientras protegemos nuestros recursos naturales y culturales."
+                   data-en="Our focus on sustainable and accessible tourism allows local communities to thrive while protecting our natural and cultural resources.">
+                   Nuestro enfoque en el turismo sostenible y accesible permite a las comunidades locales prosperar mientras protegemos nuestros recursos naturales y culturales.
+                </p>
+            </div>
+            <div class="about-image">
+                <img src="Assets/Images/about-image.jpg" alt="ASOProPositiva Team" data-es="Equipo ASOProPositiva" data-en="ASOProPositiva Team">
+            </div>
+        </div>
         
         <div class="stats-grid">
             <div class="stat-card">
@@ -519,6 +839,7 @@
         <h2 class="section-title" data-es="Nuestros Programas" data-en="Our Programs">Nuestros Programas</h2>
         <div class="programs-grid">
             <div class="program-card">
+                <div class="program-tag" data-es="Popular" data-en="Popular">Popular</div>
                 <img src="Assets/Images/modo-chill.jpg" alt="Programa Modo Chill">
                 <div class="program-info">
                     <h3>Modo Chill</h3>
@@ -526,22 +847,102 @@
                        data-en="Relaxed tourism experiences focused on wellness and connection with nature.">
                        Experiencias de turismo relajado enfocadas en bienestar y conexión con la naturaleza.
                     </p>
+                    <a href="https://modochill.org" target="_blank" class="btn" style="margin-top: 1rem; display: inline-block;" 
+                       data-es="Visitar Sitio" data-en="Visit Site">Visitar Sitio</a>
                 </div>
             </div>
             <!-- Add more program cards -->
         </div>
     </section>
 
-    <!-- Donation Section -->
-    <section id="donate" class="section">
-        <h2 class="section-title" data-es="Apoya Nuestra Misión" data-en="Support Our Mission">Apoya Nuestra Misión</h2>
-        <div class="plans">
-            <div class="plan-card">
-                <h3 data-es="Explorador" data-en="Explorer">Explorador</h3>
-                <div class="price">$10/<span data-es="mes" data-en="month">mes</span></div>
-                <a href="#" class="btn" data-es="Donar" data-en="Donate">Donar</a>
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="section">
+            <h2 class="section-title" data-es="Testimonios" data-en="Testimonials">Testimonios</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content" data-es="La experiencia con Modo Chill cambió mi perspectiva sobre el turismo en mi propio país. Ahora valoro más nuestra naturaleza y cultura."
+                       data-en="The experience with Modo Chill changed my perspective on tourism in my own country. I now value our nature and culture more.">
+                       La experiencia con Modo Chill cambió mi perspectiva sobre el turismo en mi propio país. Ahora valoro más nuestra naturaleza y cultura.
+                    </div>
+                    <div class="testimonial-author">- María F., <span data-es="Local" data-en="Local">Local</span></div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content" data-es="Como visitante internacional, ASOProPositiva me dio acceso a experiencias auténticas que nunca hubiera encontrado por mi cuenta."
+                       data-en="As an international visitor, ASOProPositiva gave me access to authentic experiences I would never have found on my own.">
+                       Como visitante internacional, ASOProPositiva me dio acceso a experiencias auténticas que nunca hubiera encontrado por mi cuenta.
+                    </div>
+                    <div class="testimonial-author">- James T., <span data-es="Visitante" data-en="Visitor">Visitante</span></div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content" data-es="Nuestra comunidad ha florecido gracias a los programas de turismo sostenible de ASOProPositiva."
+                       data-en="Our community has flourished thanks to ASOProPositiva's sustainable tourism programs.">
+                       Nuestra comunidad ha florecido gracias a los programas de turismo sostenible de ASOProPositiva.
+                    </div>
+                    <div class="testimonial-author">- Carlos M., <span data-es="Líder Comunitario" data-en="Community Leader">Líder Comunitario</span></div>
+                </div>
             </div>
-            <!-- Add more plans -->
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section">
+        <h2 class="section-title" data-es="Galería" data-en="Gallery">Galería</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="Assets/Images/gallery-1.jpg" alt="Turismo Sostenible">
+            </div>
+            <div class="gallery-item">
+                <img src="Assets/Images/gallery-2.jpg" alt="Comunidades Locales">
+            </div>
+            <div class="gallery-item">
+                <img src="Assets/Images/gallery-3.jpg" alt="Naturaleza Costa Rica">
+            </div>
+            <div class="gallery-item">
+                <img src="Assets/Images/gallery-4.jpg" alt="Experiencias Auténticas">
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Section -->
+    <section id="donate" class="donation-section">
+        <div class="donation-content">
+            <h2 class="section-title" style="color: white;" data-es="Apoya Nuestra Misión" data-en="Support Our Mission">Apoya Nuestra Misión</h2>
+            <p data-es="Tu contribución nos ayuda a continuar con nuestros programas de turismo sostenible y a impactar positivamente en más comunidades."
+               data-en="Your contribution helps us continue our sustainable tourism programs and positively impact more communities.">
+               Tu contribución nos ayuda a continuar con nuestros programas de turismo sostenible y a impactar positivamente en más comunidades.
+            </p>
+            <div class="plans">
+                <div class="plan-card">
+                    <h3 data-es="Explorador" data-en="Explorer">Explorador</h3>
+                    <div class="price">$10/<span data-es="mes" data-en="month">mes</span></div>
+                    <ul style="text-align: left; margin-bottom: 1.5rem;">
+                        <li data-es="Acceso a boletines exclusivos" data-en="Access to exclusive newsletters">Acceso a boletines exclusivos</li>
+                        <li data-es="Actualizaciones mensuales" data-en="Monthly updates">Actualizaciones mensuales</li>
+                    </ul>
+                    <a href="#" class="btn" data-es="Donar" data-en="Donate">Donar</a>
+                </div>
+                <div class="plan-card">
+                    <h3 data-es="Protector" data-en="Protector">Protector</h3>
+                    <div class="price">$25/<span data-es="mes" data-en="month">mes</span></div>
+                    <ul style="text-align: left; margin-bottom: 1.5rem;">
+                        <li data-es="Todos los beneficios anteriores" data-en="All previous benefits">Todos los beneficios anteriores</li>
+                        <li data-es="Descuentos en programas" data-en="Program discounts">Descuentos en programas</li>
+                        <li data-es="Invitación a eventos anuales" data-en="Invitation to annual events">Invitación a eventos anuales</li>
+                    </ul>
+                    <a href="#" class="btn" data-es="Donar" data-en="Donate">Donar</a>
+                </div>
+                <div class="plan-card">
+                    <h3 data-es="Guardian" data-en="Guardian">Guardian</h3>
+                    <div class="price">$50/<span data-es="mes" data-en="month">mes</span></div>
+                    <ul style="text-align: left; margin-bottom: 1.5rem;">
+                        <li data-es="Todos los beneficios anteriores" data-en="All previous benefits">Todos los beneficios anteriores</li>
+                        <li data-es="Experiencia VIP en programas" data-en="VIP program experience">Experiencia VIP en programas</li>
+                        <li data-es="Reconocimiento especial" data-en="Special recognition">Reconocimiento especial</li>
+                    </ul>
+                    <a href="#" class="btn" data-es="Donar" data-en="Donate">Donar</a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -555,7 +956,7 @@
     </section>
 
     <!-- News Section -->
-    <section id="news" class="section">
+    <section id="news" class="section news-section">
         <h2 class="section-title" data-es="Últimas Noticias" data-en="Latest News">Últimas Noticias</h2>
         <div class="news-grid" id="news-feed">
             <!-- News loaded via JS -->
@@ -584,36 +985,129 @@
         </div>
     </section>
 
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <h2 class="section-title" data-es="Contacto" data-en="Contact">Contacto</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
+            <div>
+                <h3 style="margin-bottom: 1rem; color: var(--primary);" data-es="Información de Contacto" data-en="Contact Information">Información de Contacto</h3>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span data-es="San José, Costa Rica" data-en="San José, Costa Rica">San José, Costa Rica</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+506 2222-2222</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@asopropositiva.org</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <span data-es="Lunes a Viernes: 8am - 5pm" data-en="Monday to Friday: 8am - 5pm">Lunes a Viernes: 8am - 5pm</span>
+                </div>
+            </div>
+            <div>
+                <h3 style="margin-bottom: 1rem; color: var(--primary);" data-es="Envíanos un Mensaje" data-en="Send Us a Message">Envíanos un Mensaje</h3>
+                <form id="contact-form">
+                    <div style="margin-bottom: 1rem;">
+                        <input type="text" placeholder="Nombre" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px;" required>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <input type="email" placeholder="Correo Electrónico" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px;" required>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <textarea placeholder="Mensaje" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px; min-height: 120px;" required></textarea>
+                    </div>
+                    <button type="submit" class="btn" data-es="Enviar Mensaje" data-en="Send Message">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <div class="footer-logo">
-            <img src="Assets/Logos/Asopropositiva.png" alt="Asociación ProPositiva para el Desarrollo Sostenible">
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <img src="Assets/Logos/Asopropositiva.png" alt="Asociación ProPositiva para el Desarrollo Sostenible">
+                </div>
+                <p data-es="ASOProPositiva es una asociación sin fines de lucro dedicada al desarrollo sostenible a través del turismo comunitario en Costa Rica."
+                   data-en="ASOProPositiva is a non-profit association dedicated to sustainable development through community tourism in Costa Rica.">
+                   ASOProPositiva es una asociación sin fines de lucro dedicada al desarrollo sostenible a través del turismo comunitario en Costa Rica.
+                </p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3 data-es="Enlaces Rápidos" data-en="Quick Links">Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="#about" data-es="Nosotros" data-en="About">Nosotros</a></li>
+                    <li><a href="#programs" data-es="Programas" data-en="Programs">Programas</a></li>
+                    <li><a href="#impact" data-es="Impacto" data-en="Impact">Impacto</a></li>
+                    <li><a href="#donate" data-es="Donar" data-en="Donate">Donar</a></li>
+                    <li><a href="#news" data-es="Noticias" data-en="News">Noticias</a></li>
+                    <li><a href="#contact" data-es="Contacto" data-en="Contact">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3 data-es="Contacto" data-en="Contact">Contacto</h3>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span data-es="San José, Costa Rica" data-en="San José, Costa Rica">San José, Costa Rica</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+506 2222-2222</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@asopropositiva.org</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <span data-es="Lunes a Viernes: 8am - 5pm" data-en="Monday to Friday: 8am - 5pm">Lunes a Viernes: 8am - 5pm</span>
+                </div>
+            </div>
         </div>
-        <div class="footer-links">
-            <a href="#about" data-es="Nosotros" data-en="About">Nosotros</a>
-            <a href="#programs" data-es="Programas" data-en="Programs">Programas</a>
-            <a href="#impact" data-es="Impacto" data-en="Impact">Impacto</a>
-            <a href="#donate" data-es="Donar" data-en="Donate">Donar</a>
-            <a href="#news" data-es="Noticias" data-en="News">Noticias</a>
+        <div class="footer-bottom">
+            <div class="footer-language">
+                <button class="lang-footer-btn active" data-lang="es">Español</button>
+                <button class="lang-footer-btn" data-lang="en">English</button>
+            </div>
+            <p class="copyright" data-es="© 2025 Asociación ProPositiva para el Desarrollo Sostenible. Todos los derechos reservados."
+               data-en="© 2025 Asociación ProPositiva para el Desarrollo Sostenible. All rights reserved.">
+               © 2025 Asociación ProPositiva para el Desarrollo Sostenible. Todos los derechos reservados.
+            </p>
         </div>
-        <div class="footer-language">
-            <button class="lang-footer-btn active" data-lang="es">Español</button>
-            <button class="lang-footer-btn" data-lang="en">English</button>
-        </div>
-        <p class="copyright" data-es="© 2025 Asociación ProPositiva para el Desarrollo Sostenible. Todos los derechos reservados."
-           data-en="© 2025 Asociación ProPositiva para el Desarrollo Sostenible. All rights reserved.">
-           © 2025 Asociación ProPositiva para el Desarrollo Sostenible. Todos los derechos reservados.
-        </p>
     </footer>
 
     <script>
+        // Header Scroll Effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
         // Language Toggle Functionality
         function setLanguage(lang) {
             // Update all elements with data attributes
             document.querySelectorAll('[data-es], [data-en]').forEach(element => {
                 if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                    element.placeholder = element.getAttribute(`data-${lang}-placeholder`);
+                    if (element.hasAttribute(`data-${lang}-placeholder`)) {
+                        element.placeholder = element.getAttribute(`data-${lang}-placeholder`);
+                    }
                 } else {
-                    element.textContent = element.getAttribute(`data-${lang}`);
+                    element.textContent = element.getAttribute(`data-${lang}`) || element.textContent;
                 }
             });
 
@@ -629,7 +1123,7 @@
             // Update html lang attribute
             document.documentElement.lang = lang;
 
-            // Reload weather with correct language
+            // Reload content that needs to be refreshed
             loadWeather(lang);
         }
 
@@ -643,12 +1137,14 @@
         // Mobile Menu Toggle
         document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
             document.querySelector('.nav-links').classList.toggle('active');
+            this.innerHTML = document.querySelector('.nav-links').classList.contains('active') ? '✕' : '☰';
         });
 
         // Close mobile menu when clicking a link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', function() {
                 document.querySelector('.nav-links').classList.remove('active');
+                document.querySelector('.mobile-menu-btn').innerHTML = '☰';
             });
         });
 
@@ -716,6 +1212,12 @@
                 date: '10 Octubre 2023',
                 excerpt: 'Reconocimiento nacional por nuestro impacto en el desarrollo sostenible.',
                 image: 'Assets/Images/news-2.jpg'
+            },
+            { 
+                title: 'Talleres de Capacitación para Guías Locales', 
+                date: '5 Septiembre 2023',
+                excerpt: 'Formación especializada para miembros de comunidades en turismo sostenible.',
+                image: 'Assets/Images/news-3.jpg'
             }
         ];
 
@@ -731,6 +1233,12 @@
                 date: 'October 10, 2023',
                 excerpt: 'National recognition for our impact on sustainable development.',
                 image: 'Assets/Images/news-2.jpg'
+            },
+            { 
+                title: 'Training Workshops for Local Guides', 
+                date: 'September 5, 2023',
+                excerpt: 'Specialized training for community members in sustainable tourism.',
+                image: 'Assets/Images/news-3.jpg'
             }
         ];
 
@@ -749,6 +1257,7 @@
                         <p class="news-date">${item.date}</p>
                         <h3>${item.title}</h3>
                         <p>${item.excerpt}</p>
+                        <a href="#" class="btn" style="margin-top: 1rem; display: inline-block;" data-es="Leer Más" data-en="Read More">Leer Más</a>
                     </div>
                 `;
                 newsContainer.appendChild(article);
@@ -773,13 +1282,34 @@
             this.reset();
         });
 
+        // Contact Form Submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const lang = document.documentElement.lang;
+            
+            // In a real implementation, you would send this to your server
+            console.log('Form submitted');
+            
+            // Show success message
+            const successMsg = lang === 'es' 
+                ? '¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.' 
+                : 'Message sent successfully! We will contact you soon.';
+            
+            alert(successMsg);
+            this.reset();
+        });
+
         // Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
 
@@ -789,13 +1319,12 @@
             setLanguage('es');
             loadNews('es');
             
-            // Event listener for language changes
-            document.querySelectorAll('[data-lang]').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const lang = this.getAttribute('data-lang');
-                    setLanguage(lang);
-                    loadNews(lang);
-                });
+            // Close mobile menu if open when resizing
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    document.querySelector('.nav-links').classList.remove('active');
+                    document.querySelector('.mobile-menu-btn').innerHTML = '☰';
+                }
             });
         };
     </script>
