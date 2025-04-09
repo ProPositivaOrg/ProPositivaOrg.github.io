@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProPositiva | Turismo Sostenible en Costa Rica</title>
+    <title>ASOProPositiva | Turismo Sostenible en Costa Rica</title>
     <style>
         :root {
-            --primary: #2F4C39; /* Dark green from logo */
-            --secondary: #E7C697; /* Light beige for contrast */
-            --accent: #D34F48; /* Warm accent color */
-            --text: #333333; /* Dark gray for text */
-            --light-bg: #F8F5F0; /* Light background */
+            --primary: #2F4C39;
+            --secondary: #E7C697;
+            --accent: #D34F48;
+            --text: #333333;
+            --light-bg: #F8F5F0;
         }
 
         * {
@@ -24,6 +24,30 @@
             line-height: 1.6;
             color: var(--text);
             background-color: var(--light-bg);
+        }
+
+        /* Language Toggle */
+        .language-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 2rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .language-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-weight: 500;
+            cursor: pointer;
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .language-btn.active {
+            background: var(--primary);
+            color: white;
         }
 
         /* Header */
@@ -42,10 +66,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
         }
 
         .logo {
-            height: 60px; /* Adjust based on your logo's aspect ratio */
+            height: 60px;
         }
 
         .logo img {
@@ -271,6 +296,54 @@
             margin-bottom: 0.5rem;
         }
 
+        /* Subscription Box */
+        .subscription-box {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-top: 3rem;
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .subscription-box h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .subscription-box p {
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .subscription-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto 1rem;
+        }
+
+        .subscription-form input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .subscription-form .btn {
+            padding: 0.8rem 1.5rem;
+        }
+
+        .privacy-notice {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
         /* Footer */
         footer {
             background: var(--primary);
@@ -301,6 +374,23 @@
             text-decoration: none;
         }
 
+        .footer-language {
+            margin-bottom: 1rem;
+        }
+
+        .footer-language button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            margin: 0 0.5rem;
+            font-weight: 500;
+        }
+
+        .footer-language button.active {
+            text-decoration: underline;
+        }
+
         .copyright {
             opacity: 0.8;
             font-size: 0.9rem;
@@ -318,6 +408,12 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            .language-toggle {
+                position: static;
+                justify-content: flex-end;
+                margin-bottom: 1rem;
+            }
+            
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -351,6 +447,14 @@
                 flex-direction: column;
                 gap: 1rem;
             }
+            
+            .subscription-form {
+                flex-direction: column;
+            }
+            
+            .subscription-form .btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -358,57 +462,70 @@
     <header>
         <nav>
             <div class="logo">
-                <img src="Assets/Logos/Asopropositiva 2025 logotipo.png" alt="Asociación ProPositiva">
+                <img src="Assets/Logos/Asopropositiva 2025 logotipo.png" alt="ASOProPositiva">
+            </div>
+            <div class="language-toggle">
+                <button class="language-btn active" data-lang="es">ES</button>
+                <button class="language-btn" data-lang="en">EN</button>
             </div>
             <button class="mobile-menu-btn">☰</button>
             <div class="nav-links">
-                <a href="#about">Nosotros</a>
-                <a href="#programs">Programas</a>
-                <a href="#impact">Impacto</a>
-                <a href="#donate">Donar</a>
-                <a href="#news">Noticias</a>
+                <a href="#about" data-es="Nosotros" data-en="About">Nosotros</a>
+                <a href="#programs" data-es="Programas" data-en="Programs">Programas</a>
+                <a href="#impact" data-es="Impacto" data-en="Impact">Impacto</a>
+                <a href="#donate" data-es="Donar" data-en="Donate">Donar</a>
+                <a href="#news" data-es="Noticias" data-en="News">Noticias</a>
             </div>
         </nav>
     </header>
 
     <section class="hero">
         <div class="hero-content">
-            <h1>Turismo Sostenible en Costa Rica</h1>
-            <p>Descubre la belleza de nuestro país de manera accesible y responsable</p>
-            <a href="#programs" class="btn">Ver Programas</a>
+            <h1 data-es="Turismo Sostenible en Costa Rica" data-en="Sustainable Tourism in Costa Rica">Turismo Sostenible en Costa Rica</h1>
+            <p data-es="Descubre la belleza de nuestro país de manera accesible y responsable" 
+               data-en="Discover the beauty of our country in an accessible and responsible way">
+               Descubre la belleza de nuestro país de manera accesible y responsable
+            </p>
+            <a href="#programs" class="btn" data-es="Ver Programas" data-en="View Programs">Ver Programas</a>
         </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="section">
-        <h2 class="section-title">Nuestra Misión</h2>
-        <p>Promovemos el desarrollo sostenible a través del turismo comunitario, conectando a los costarricenses con la belleza de su país y compartiendo experiencias auténticas con visitantes internacionales.</p>
+        <h2 class="section-title" data-es="Nuestra Misión" data-en="Our Mission">Nuestra Misión</h2>
+        <p data-es="Promovemos el desarrollo sostenible a través del turismo comunitario, conectando a los costarricenses con la belleza de su país y compartiendo experiencias auténticas con visitantes internacionales."
+           data-en="We promote sustainable development through community tourism, connecting Costa Ricans with the beauty of their country and sharing authentic experiences with international visitors.">
+           Promovemos el desarrollo sostenible a través del turismo comunitario, conectando a los costarricenses con la belleza de su país y compartiendo experiencias auténticas con visitantes internacionales.
+        </p>
         
         <div class="stats-grid">
             <div class="stat-card">
                 <h3>15K+</h3>
-                <p>Personas beneficiadas</p>
+                <p data-es="Personas beneficiadas" data-en="People benefited">Personas beneficiadas</p>
             </div>
             <div class="stat-card">
                 <h3>200+</h3>
-                <p>Comunidades involucradas</p>
+                <p data-es="Comunidades involucradas" data-en="Communities involved">Comunidades involucradas</p>
             </div>
             <div class="stat-card">
                 <h3>95%</h3>
-                <p>Recursos destinados a programas</p>
+                <p data-es="Recursos destinados a programas" data-en="Funds to programs">Recursos destinados a programas</p>
             </div>
         </div>
     </section>
 
     <!-- Programs Section -->
     <section id="programs" class="section">
-        <h2 class="section-title">Nuestros Programas</h2>
+        <h2 class="section-title" data-es="Nuestros Programas" data-en="Our Programs">Nuestros Programas</h2>
         <div class="programs-grid">
             <div class="program-card">
                 <img src="Assets/Images/modo-chill.jpg" alt="Programa Modo Chill">
                 <div class="program-info">
                     <h3>Modo Chill</h3>
-                    <p>Experiencias de turismo relajado enfocadas en bienestar y conexión con la naturaleza.</p>
+                    <p data-es="Experiencias de turismo relajado enfocadas en bienestar y conexión con la naturaleza."
+                       data-en="Relaxed tourism experiences focused on wellness and connection with nature.">
+                       Experiencias de turismo relajado enfocadas en bienestar y conexión con la naturaleza.
+                    </p>
                 </div>
             </div>
             <!-- Add more program cards -->
@@ -417,12 +534,12 @@
 
     <!-- Donation Section -->
     <section id="donate" class="section">
-        <h2 class="section-title">Apoya Nuestra Misión</h2>
+        <h2 class="section-title" data-es="Apoya Nuestra Misión" data-en="Support Our Mission">Apoya Nuestra Misión</h2>
         <div class="plans">
             <div class="plan-card">
-                <h3>Explorador</h3>
-                <div class="price">$10/mes</div>
-                <a href="#" class="btn">Donar</a>
+                <h3 data-es="Explorador" data-en="Explorer">Explorador</h3>
+                <div class="price">$10/<span data-es="mes" data-en="month">mes</span></div>
+                <a href="#" class="btn" data-es="Donar" data-en="Donate">Donar</a>
             </div>
             <!-- Add more plans -->
         </div>
@@ -430,18 +547,40 @@
 
     <!-- Weather Dashboard -->
     <section class="section">
-        <h2 class="section-title">Clima para Viajar</h2>
+        <h2 class="section-title" data-es="Clima para Viajar" data-en="Travel Weather">Clima para Viajar</h2>
         <div class="weather-dashboard" id="weather">
             <!-- Weather data loaded via JS -->
-            <h3>Cargando información climática...</h3>
+            <h3 data-es="Cargando información climática..." data-en="Loading weather information...">Cargando información climática...</h3>
         </div>
     </section>
 
     <!-- News Section -->
     <section id="news" class="section">
-        <h2 class="section-title">Últimas Noticias</h2>
+        <h2 class="section-title" data-es="Últimas Noticias" data-en="Latest News">Últimas Noticias</h2>
         <div class="news-grid" id="news-feed">
             <!-- News loaded via JS -->
+        </div>
+        
+        <!-- Subscription Box -->
+        <div class="subscription-box">
+            <h3 data-es="Mantente Informado" data-en="Stay Updated">Mantente Informado</h3>
+            <p data-es="Suscríbete para recibir nuestras últimas noticias y actualizaciones directamente en tu correo."
+               data-en="Subscribe to receive our latest news and updates directly to your email.">
+               Suscríbete para recibir nuestras últimas noticias y actualizaciones directamente en tu correo.
+            </p>
+            <form id="newsletter-form" class="subscription-form">
+                <input type="email" 
+                       data-es-placeholder="Tu correo electrónico" 
+                       data-en-placeholder="Your email address" 
+                       placeholder="Tu correo electrónico" 
+                       required>
+                <button type="submit" class="btn" data-es="Suscribirse" data-en="Subscribe">Suscribirse</button>
+            </form>
+            <p class="privacy-notice" 
+               data-es="Respetamos tu privacidad. No compartiremos tu información."
+               data-en="We respect your privacy. We won't share your information.">
+               Respetamos tu privacidad. No compartiremos tu información.
+            </p>
         </div>
     </section>
 
@@ -450,16 +589,57 @@
             <img src="Assets/Logos/Asopropositiva.png" alt="Asociación ProPositiva para el Desarrollo Sostenible">
         </div>
         <div class="footer-links">
-            <a href="#about">Nosotros</a>
-            <a href="#programs">Programas</a>
-            <a href="#impact">Impacto</a>
-            <a href="#donate">Donar</a>
-            <a href="#news">Noticias</a>
+            <a href="#about" data-es="Nosotros" data-en="About">Nosotros</a>
+            <a href="#programs" data-es="Programas" data-en="Programs">Programas</a>
+            <a href="#impact" data-es="Impacto" data-en="Impact">Impacto</a>
+            <a href="#donate" data-es="Donar" data-en="Donate">Donar</a>
+            <a href="#news" data-es="Noticias" data-en="News">Noticias</a>
         </div>
-        <p class="copyright">© 2025 Asociación ProPositiva para el Desarrollo Sostenible. Todos los derechos reservados.</p>
+        <div class="footer-language">
+            <button class="lang-footer-btn active" data-lang="es">Español</button>
+            <button class="lang-footer-btn" data-lang="en">English</button>
+        </div>
+        <p class="copyright" data-es="© 2025 Asociación ProPositiva para el Desarrollo Sostenible. Todos los derechos reservados."
+           data-en="© 2025 Asociación ProPositiva para el Desarrollo Sostenible. All rights reserved.">
+           © 2025 Asociación ProPositiva para el Desarrollo Sostenible. Todos los derechos reservados.
+        </p>
     </footer>
 
     <script>
+        // Language Toggle Functionality
+        function setLanguage(lang) {
+            // Update all elements with data attributes
+            document.querySelectorAll('[data-es], [data-en]').forEach(element => {
+                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                    element.placeholder = element.getAttribute(`data-${lang}-placeholder`);
+                } else {
+                    element.textContent = element.getAttribute(`data-${lang}`);
+                }
+            });
+
+            // Update active buttons
+            document.querySelectorAll('.language-btn, .lang-footer-btn').forEach(btn => {
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // Update html lang attribute
+            document.documentElement.lang = lang;
+
+            // Reload weather with correct language
+            loadWeather(lang);
+        }
+
+        // Language toggle event listeners
+        document.querySelectorAll('.language-btn, .lang-footer-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                setLanguage(this.getAttribute('data-lang'));
+            });
+        });
+
         // Mobile Menu Toggle
         document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
             document.querySelector('.nav-links').classList.toggle('active');
@@ -473,36 +653,58 @@
         });
 
         // Weather API Integration
-        async function loadWeather() {
+        async function loadWeather(lang = 'es') {
             try {
                 // In a real implementation, replace with actual API key
-                const response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=San%20Jose,CR&units=metric&lang=es&appid=YOUR_API_KEY');
+                const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=San%20Jose,CR&units=metric&lang=${lang}&appid=YOUR_API_KEY`);
                 const data = await response.json();
                 
                 const weatherDiv = document.getElementById('weather');
-                weatherDiv.innerHTML = `
-                    <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
-                        <div style="text-align: center; padding: 1rem;">
-                            <h3>${data.name}</h3>
-                            <p style="font-size: 2rem; font-weight: bold; color: var(--accent);">${Math.round(data.main.temp)}°C</p>
-                            <p>${data.weather[0].description}</p>
+                if (lang === 'es') {
+                    weatherDiv.innerHTML = `
+                        <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+                            <div style="text-align: center; padding: 1rem;">
+                                <h3>${data.name}</h3>
+                                <p style="font-size: 2rem; font-weight: bold; color: var(--accent);">${Math.round(data.main.temp)}°C</p>
+                                <p>${data.weather[0].description}</p>
+                            </div>
+                            <div style="text-align: center; padding: 1rem;">
+                                <p>Humedad: ${data.main.humidity}%</p>
+                                <p>Viento: ${data.wind.speed} m/s</p>
+                            </div>
                         </div>
-                        <div style="text-align: center; padding: 1rem;">
-                            <p>Humedad: ${data.main.humidity}%</p>
-                            <p>Viento: ${data.wind.speed} m/s</p>
+                    `;
+                } else {
+                    weatherDiv.innerHTML = `
+                        <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+                            <div style="text-align: center; padding: 1rem;">
+                                <h3>${data.name}</h3>
+                                <p style="font-size: 2rem; font-weight: bold; color: var(--accent);">${Math.round(data.main.temp)}°C</p>
+                                <p>${data.weather[0].description}</p>
+                            </div>
+                            <div style="text-align: center; padding: 1rem;">
+                                <p>Humidity: ${data.main.humidity}%</p>
+                                <p>Wind: ${data.wind.speed} m/s</p>
+                            </div>
                         </div>
-                    </div>
-                `;
+                    `;
+                }
             } catch (error) {
                 console.error("Error loading weather:", error);
-                document.getElementById('weather').innerHTML = `
-                    <p>Información climática no disponible actualmente</p>
-                `;
+                if (lang === 'es') {
+                    document.getElementById('weather').innerHTML = `
+                        <p>Información climática no disponible actualmente</p>
+                    `;
+                } else {
+                    document.getElementById('weather').innerHTML = `
+                        <p>Weather information currently unavailable</p>
+                    `;
+                }
             }
         }
 
         // News Loader
-        const newsFeed = [
+        const newsFeedEs = [
             { 
                 title: 'Nuevas Rutas de Senderismo en la Zona Norte', 
                 date: '15 Octubre 2023',
@@ -517,9 +719,28 @@
             }
         ];
 
-        function loadNews() {
+        const newsFeedEn = [
+            { 
+                title: 'New Hiking Trails in the Northern Zone', 
+                date: 'October 15, 2023',
+                excerpt: 'Expansion of our Modo Chill program with 5 new accessible trails.',
+                image: 'Assets/Images/news-1.jpg'
+            },
+            { 
+                title: 'Best Community Program Award 2023', 
+                date: 'October 10, 2023',
+                excerpt: 'National recognition for our impact on sustainable development.',
+                image: 'Assets/Images/news-2.jpg'
+            }
+        ];
+
+        function loadNews(lang = 'es') {
             const newsContainer = document.getElementById('news-feed');
-            newsFeed.forEach(item => {
+            newsContainer.innerHTML = '';
+            
+            const newsItems = lang === 'es' ? newsFeedEs : newsFeedEn;
+            
+            newsItems.forEach(item => {
                 const article = document.createElement('article');
                 article.className = 'news-card';
                 article.innerHTML = `
@@ -534,9 +755,27 @@
             });
         }
 
+        // Newsletter Form Submission
+        document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input').value;
+            const lang = document.documentElement.lang;
+            
+            // In a real implementation, you would send this to your server
+            console.log(`Subscribed email (${lang}):`, email);
+            
+            // Show success message
+            const successMsg = lang === 'es' 
+                ? '¡Gracias por suscribirte! Pronto recibirás nuestras actualizaciones.' 
+                : 'Thank you for subscribing! You will receive our updates soon.';
+            
+            alert(successMsg);
+            this.reset();
+        });
+
         // Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
@@ -546,8 +785,18 @@
 
         // Initialize
         window.onload = () => {
-            loadWeather();
-            loadNews();
+            // Set default language to Spanish
+            setLanguage('es');
+            loadNews('es');
+            
+            // Event listener for language changes
+            document.querySelectorAll('[data-lang]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    setLanguage(lang);
+                    loadNews(lang);
+                });
+            });
         };
     </script>
 </body>
