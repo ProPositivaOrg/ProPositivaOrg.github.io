@@ -1,39 +1,39 @@
-
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Costa Rica Pura Vida | Nonprofit Tourism Organization</title>
+    <title>ProPositiva | Turismo Sostenible en Costa Rica</title>
     <style>
         :root {
-            --primary: #2F4C39;
-            --secondary: #E7C697;
-            --accent: #D34F48;
-            --text: #333;
+            --primary: #2F4C39; /* Dark green from logo */
+            --secondary: #E7C697; /* Light beige for contrast */
+            --accent: #D34F48; /* Warm accent color */
+            --text: #333333; /* Dark gray for text */
+            --light-bg: #F8F5F0; /* Light background */
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
         }
 
         body {
             line-height: 1.6;
             color: var(--text);
+            background-color: var(--light-bg);
         }
 
         /* Header */
         header {
-            background: var(--primary);
-            padding: 1rem;
+            background: white;
+            padding: 1rem 2rem;
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         nav {
@@ -45,9 +45,17 @@
         }
 
         .logo {
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.8rem;
+            font-weight: 700;
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            display: block;
+            font-size: 1.4rem;
+            font-weight: 400;
         }
 
         .nav-links {
@@ -56,15 +64,23 @@
         }
 
         .nav-links a {
-            color: white;
+            color: var(--primary);
             text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            border-bottom: 2px solid var(--accent);
         }
 
         /* Hero Section */
         .hero {
-            height: 80vh;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                        url('nature-bg.jpg') center/cover;
+            height: 90vh;
+            background: linear-gradient(rgba(47, 76, 57, 0.7), rgba(47, 76, 57, 0.7)), 
+                        url('costarica-nature.jpg') center/cover;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -73,22 +89,63 @@
             padding: 2rem;
         }
 
+        .hero-content {
+            max-width: 800px;
+        }
+
         .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #b93c35;
+            transform: translateY(-2px);
         }
 
         /* Sections */
         .section {
-            padding: 4rem 2rem;
+            padding: 5rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .section h2 {
+        .section-title {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             color: var(--primary);
+            font-size: 2.2rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
         }
 
         /* Stats Grid */
@@ -96,14 +153,26 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            margin: 2rem 0;
+            margin: 3rem 0;
         }
 
         .stat-card {
             text-align: center;
-            padding: 2rem;
-            background: #f9f9f9;
+            padding: 2.5rem 1.5rem;
+            background: white;
             border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card h3 {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
         }
 
         /* Programs Grid */
@@ -114,18 +183,34 @@
         }
 
         .program-card {
-            border: 1px solid #ddd;
+            background: white;
             border-radius: 8px;
             overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
         .program-card img {
             width: 100%;
-            height: 200px;
+            height: 220px;
             object-fit: cover;
         }
 
-        /* Donation Plans */
+        .program-info {
+            padding: 1.5rem;
+        }
+
+        .program-info h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Donation Section */
         .plans {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -134,35 +219,107 @@
 
         .plan-card {
             padding: 2rem;
-            border: 2px solid var(--primary);
+            background: white;
             border-radius: 8px;
             text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--accent);
+        }
+
+        .plan-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .plan-card .price {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
         }
 
         /* Weather Dashboard */
         .weather-dashboard {
-            background: #f0f0f0;
+            background: white;
             padding: 2rem;
             border-radius: 8px;
             margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        /* News Section */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .news-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 1.5rem;
+        }
+
+        .news-date {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
         }
 
         /* Footer */
         footer {
             background: var(--primary);
             color: white;
-            padding: 2rem;
+            padding: 3rem 2rem;
             text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .copyright {
+            opacity: 0.8;
+            font-size: 0.9rem;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
             .nav-links {
                 display: none;
             }
             
-            .hero h1 {
-                font-size: 2rem;
+            .section {
+                padding: 3rem 1.5rem;
             }
         }
     </style>
@@ -170,54 +327,58 @@
 <body>
     <header>
         <nav>
-            <div class="logo">Pura Vida CR</div>
+            <div class="logo">
+                ProPositiva<br>
+                <span>Desarrollo Sostenible</span>
+            </div>
             <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#programs">Programs</a>
-                <a href="#impact">Impact</a>
-                <a href="#donate">Donate</a>
-                <a href="#news">News</a>
+                <a href="#about">Nosotros</a>
+                <a href="#programs">Programas</a>
+                <a href="#impact">Impacto</a>
+                <a href="#donate">Donar</a>
+                <a href="#news">Noticias</a>
             </div>
         </nav>
     </header>
 
     <section class="hero">
-        <div>
-            <h1>Discover Costa Rica's Hidden Gems</h1>
-            <p>Affordable adventures for locals, authentic experiences for visitors</p>
+        <div class="hero-content">
+            <h1>Turismo Sostenible en Costa Rica</h1>
+            <p>Descubre la belleza de nuestro país de manera accesible y responsable</p>
+            <a href="#programs" class="btn">Ver Programas</a>
         </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="section">
-        <h2>Our Mission</h2>
-        <p>We make Costa Rica's beauty accessible to everyone through sustainable tourism initiatives...</p>
+        <h2 class="section-title">Nuestra Misión</h2>
+        <p>Promovemos el desarrollo sostenible a través del turismo comunitario, conectando a los costarricenses con la belleza de su país y compartiendo experiencias auténticas con visitantes internacionales.</p>
         
         <div class="stats-grid">
             <div class="stat-card">
                 <h3>15K+</h3>
-                <p>Locals Empowered</p>
+                <p>Personas beneficiadas</p>
             </div>
             <div class="stat-card">
                 <h3>200+</h3>
-                <p>Community Partnerships</p>
+                <p>Comunidades involucradas</p>
             </div>
             <div class="stat-card">
                 <h3>95%</h3>
-                <p>Funds Directly to Programs</p>
+                <p>Recursos destinados a programas</p>
             </div>
         </div>
     </section>
 
     <!-- Programs Section -->
     <section id="programs" class="section">
-        <h2>Our Programs</h2>
+        <h2 class="section-title">Nuestros Programas</h2>
         <div class="programs-grid">
             <div class="program-card">
-                <img src="chill-mode.jpg" alt="Modo Chill Program">
+                <img src="modo-chill.jpg" alt="Programa Modo Chill">
                 <div class="program-info">
                     <h3>Modo Chill</h3>
-                    <p>Relaxed-paced tours focusing on wellness and nature connection</p>
+                    <p>Experiencias de turismo relajado enfocadas en bienestar y conexión con la naturaleza.</p>
                 </div>
             </div>
             <!-- Add more program cards -->
@@ -226,12 +387,12 @@
 
     <!-- Donation Section -->
     <section id="donate" class="section">
-        <h2>Support Our Mission</h2>
+        <h2 class="section-title">Apoya Nuestra Misión</h2>
         <div class="plans">
             <div class="plan-card">
-                <h3>Explorer</h3>
-                <p>$10/month</p>
-                <button>Subscribe</button>
+                <h3>Explorador</h3>
+                <div class="price">$10/mes</div>
+                <a href="#" class="btn">Donar</a>
             </div>
             <!-- Add more plans -->
         </div>
@@ -239,49 +400,92 @@
 
     <!-- Weather Dashboard -->
     <section class="section">
-        <h2>Travel Forecast</h2>
+        <h2 class="section-title">Clima para Viajar</h2>
         <div class="weather-dashboard" id="weather">
             <!-- Weather data loaded via JS -->
+            <h3>Cargando información climática...</h3>
         </div>
     </section>
 
     <!-- News Section -->
     <section id="news" class="section">
-        <h2>Latest Updates</h2>
-        <div id="news-feed"></div>
+        <h2 class="section-title">Últimas Noticias</h2>
+        <div class="news-grid" id="news-feed">
+            <!-- News loaded via JS -->
+        </div>
     </section>
 
     <footer>
-        <p>© 2023 Pura Vida CR. All rights reserved.</p>
+        <div class="footer-logo">
+            ProPositiva<br>
+            <span>Desarrollo Sostenible</span>
+        </div>
+        <div class="footer-links">
+            <a href="#about">Nosotros</a>
+            <a href="#programs">Programas</a>
+            <a href="#impact">Impacto</a>
+            <a href="#donate">Donar</a>
+            <a href="#news">Noticias</a>
+        </div>
+        <p class="copyright">© 2023 Asociación ProPositiva para el Desarrollo Sostenible. Todos los derechos reservados.</p>
     </footer>
 
     <script>
         // Weather API Integration
         async function loadWeather() {
-            const response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=CostaRica&appid=YOUR_API_KEY');
-            const data = await response.json();
-            
-            const weatherDiv = document.getElementById('weather');
-            weatherDiv.innerHTML = `
-                <h3>Current Weather: ${data.weather[0].main}</h3>
-                <p>Temperature: ${Math.round(data.main.temp - 273.15)}°C</p>
-                <p>Humidity: ${data.main.humidity}%</p>
-            `;
+            try {
+                // In a real implementation, replace with actual API key
+                const response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=San%20Jose,CR&units=metric&lang=es&appid=YOUR_API_KEY');
+                const data = await response.json();
+                
+                const weatherDiv = document.getElementById('weather');
+                weatherDiv.innerHTML = `
+                    <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+                        <div style="text-align: center; padding: 1rem;">
+                            <h3>${data.name}</h3>
+                            <p style="font-size: 2rem; font-weight: bold; color: var(--accent);">${Math.round(data.main.temp)}°C</p>
+                            <p>${data.weather[0].description}</p>
+                        </div>
+                        <div style="text-align: center; padding: 1rem;">
+                            <p>Humedad: ${data.main.humidity}%</p>
+                            <p>Viento: ${data.wind.speed} m/s</p>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                console.error("Error loading weather:", error);
+                document.getElementById('weather').innerHTML = `
+                    <p>Información climática no disponible actualmente</p>
+                `;
+            }
         }
 
         // News Loader
         const newsFeed = [
-            { title: 'New Hiking Trails Opened', date: '2023-10-15' },
-            { title: 'Community Partnership Award', date: '2023-10-10' }
+            { 
+                title: 'Nuevas Rutas de Senderismo en la Zona Norte', 
+                date: '15 Octubre 2023',
+                excerpt: 'Ampliación de nuestro programa Modo Chill con 5 nuevas rutas accesibles.'
+            },
+            { 
+                title: 'Premio al Mejor Programa Comunitario 2023', 
+                date: '10 Octubre 2023',
+                excerpt: 'Reconocimiento nacional por nuestro impacto en el desarrollo sostenible.'
+            }
         ];
 
         function loadNews() {
             const newsContainer = document.getElementById('news-feed');
             newsFeed.forEach(item => {
                 const article = document.createElement('article');
+                article.className = 'news-card';
                 article.innerHTML = `
-                    <h3>${item.title}</h3>
-                    <p>${item.date}</p>
+                    <img src="news-${newsFeed.indexOf(item)+1}.jpg" alt="${item.title}">
+                    <div class="news-content">
+                        <p class="news-date">${item.date}</p>
+                        <h3>${item.title}</h3>
+                        <p>${item.excerpt}</p>
+                    </div>
                 `;
                 newsContainer.appendChild(article);
             });
