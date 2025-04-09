@@ -45,17 +45,12 @@
         }
 
         .logo {
-            color: var(--primary);
-            font-size: 1.8rem;
-            font-weight: 700;
-            line-height: 1.2;
-            text-transform: uppercase;
+            height: 60px; /* Adjust based on your logo's aspect ratio */
         }
 
-        .logo span {
-            display: block;
-            font-size: 1.4rem;
-            font-weight: 400;
+        .logo img {
+            height: 100%;
+            width: auto;
         }
 
         .nav-links {
@@ -80,7 +75,7 @@
         .hero {
             height: 90vh;
             background: linear-gradient(rgba(47, 76, 57, 0.7), rgba(47, 76, 57, 0.7)), 
-                        url('costarica-nature.jpg') center/cover;
+                        url('Assets/Images/costarica-nature.jpg') center/cover;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -285,10 +280,13 @@
         }
 
         .footer-logo {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
+            height: 70px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .footer-logo img {
+            height: 100%;
+            width: auto;
         }
 
         .footer-links {
@@ -308,6 +306,16 @@
             font-size: 0.9rem;
         }
 
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .hero h1 {
@@ -316,10 +324,32 @@
             
             .nav-links {
                 display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
             }
             
             .section {
                 padding: 3rem 1.5rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
             }
         }
     </style>
@@ -328,9 +358,9 @@
     <header>
         <nav>
             <div class="logo">
-                ProPositiva<br>
-                <span>Desarrollo Sostenible</span>
+                <img src="Assets/Logos/Asopropositiva 2025 logotipo.png" alt="Asociación ProPositiva">
             </div>
+            <button class="mobile-menu-btn">☰</button>
             <div class="nav-links">
                 <a href="#about">Nosotros</a>
                 <a href="#programs">Programas</a>
@@ -375,7 +405,7 @@
         <h2 class="section-title">Nuestros Programas</h2>
         <div class="programs-grid">
             <div class="program-card">
-                <img src="modo-chill.jpg" alt="Programa Modo Chill">
+                <img src="Assets/Images/modo-chill.jpg" alt="Programa Modo Chill">
                 <div class="program-info">
                     <h3>Modo Chill</h3>
                     <p>Experiencias de turismo relajado enfocadas en bienestar y conexión con la naturaleza.</p>
@@ -417,8 +447,7 @@
 
     <footer>
         <div class="footer-logo">
-            ProPositiva<br>
-            <span>Desarrollo Sostenible</span>
+            <img src="Assets/Logos/Asopropositiva.png" alt="Asociación ProPositiva para el Desarrollo Sostenible">
         </div>
         <div class="footer-links">
             <a href="#about">Nosotros</a>
@@ -431,6 +460,18 @@
     </footer>
 
     <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
         // Weather API Integration
         async function loadWeather() {
             try {
@@ -465,12 +506,14 @@
             { 
                 title: 'Nuevas Rutas de Senderismo en la Zona Norte', 
                 date: '15 Octubre 2023',
-                excerpt: 'Ampliación de nuestro programa Modo Chill con 5 nuevas rutas accesibles.'
+                excerpt: 'Ampliación de nuestro programa Modo Chill con 5 nuevas rutas accesibles.',
+                image: 'Assets/Images/news-1.jpg'
             },
             { 
                 title: 'Premio al Mejor Programa Comunitario 2023', 
                 date: '10 Octubre 2023',
-                excerpt: 'Reconocimiento nacional por nuestro impacto en el desarrollo sostenible.'
+                excerpt: 'Reconocimiento nacional por nuestro impacto en el desarrollo sostenible.',
+                image: 'Assets/Images/news-2.jpg'
             }
         ];
 
@@ -480,7 +523,7 @@
                 const article = document.createElement('article');
                 article.className = 'news-card';
                 article.innerHTML = `
-                    <img src="news-${newsFeed.indexOf(item)+1}.jpg" alt="${item.title}">
+                    <img src="${item.image}" alt="${item.title}">
                     <div class="news-content">
                         <p class="news-date">${item.date}</p>
                         <h3>${item.title}</h3>
