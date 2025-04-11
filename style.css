@@ -421,8 +421,7 @@ header.scrolled .language-btn.active {
 
 /* Donation Section */
 .donation-section {
-    background: linear-gradient(rgba(47, 76, 57, 0.9), rgba(47, 76, 57, 0.9)), 
-                url('Assets/Images/donate-bg.jpg') center/cover;
+    background: var(--primary); 
     color: white;
     text-align: center;
     padding: 4rem 2rem;
