@@ -134,19 +134,19 @@ document.addEventListener('DOMContentLoaded', function() {
             title: 'Nuevas Rutas de Senderismo en la Zona Norte', 
             date: '15 Octubre 2023',
             excerpt: 'Ampliación de nuestro programa Modo Chill con 5 nuevas rutas accesibles.',
-            image: 'Assets/Images/news-1.jpg'
+            image: 'Assets/Images/aleksandar-popovski-IIEJoyFkAPI-unsplash.jpg'
         },
         { 
             title: 'Premio al Mejor Programa Comunitario 2023', 
             date: '10 Octubre 2023',
             excerpt: 'Reconocimiento nacional por nuestro impacto en el desarrollo sostenible.',
-            image: 'Assets/Images/news-2.jpg'
+            image: 'Assets/Images/alfonso-castro-HaGwCk2AD84-unsplash.jpg'
         },
         { 
             title: 'Talleres de Capacitación para Guías Locales', 
             date: '5 Septiembre 2023',
             excerpt: 'Formación especializada para miembros de comunidades en turismo sostenible.',
-            image: 'Assets/Images/news-3.jpg'
+            image: 'Assets/Images/bernd-dittrich-Y3GT-msn_LE-unsplash.jpg'
         }
     ];
 
@@ -155,19 +155,19 @@ document.addEventListener('DOMContentLoaded', function() {
             title: 'New Hiking Trails in the Northern Zone', 
             date: 'October 15, 2023',
             excerpt: 'Expansion of our Modo Chill program with 5 new accessible trails.',
-            image: 'Assets/Images/news-1.jpg'
+            image: 'Assets/Images/aleksandar-popovski-IIEJoyFkAPI-unsplash.jpg'
         },
         { 
             title: 'Best Community Program Award 2023', 
             date: 'October 10, 2023',
             excerpt: 'National recognition for our impact on sustainable development.',
-            image: 'Assets/Images/news-2.jpg'
+            image: 'Assets/Images/alfonso-castro-HaGwCk2AD84-unsplash.jpg'
         },
         { 
             title: 'Training Workshops for Local Guides', 
             date: 'September 5, 2023',
             excerpt: 'Specialized training for community members in sustainable tourism.',
-            image: 'Assets/Images/news-3.jpg'
+            image: 'Assets/Images/bernd-dittrich-Y3GT-msn_LE-unsplash.jpg'
         }
     ];
 
