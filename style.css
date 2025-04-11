@@ -96,7 +96,6 @@ nav {
 
 /* Language Toggle */
 .language-toggle {
-    position: static;
     display: flex;
     gap: 0.5rem;
     z-index: 101;
@@ -395,7 +394,7 @@ header.scrolled .language-btn.active {
 
 .program-card img {
     width: 100%;
-    height: 220px;
+    height: auto;
     object-fit: cover;
 }
 
