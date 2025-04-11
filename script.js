@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ===== UPDATED WEATHER FUNCTIONS ===== //
+    // Weather API Integration
     async function loadWeather(lang = 'es') {
         try {
             const locationSelect = document.getElementById('location-select');
@@ -236,10 +236,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function getMoonPhase(date) {
         const year = date.getFullYear();
-        const month = date.getMonth();
+        let month = date.getMonth();
         const day = date.getDate();
         
-        let c = e = jd = b = 0;
+        let c, e, jd, b;
         
         if (month < 3) {
             year--;
@@ -419,7 +419,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setLanguage('es');
     loadNews('es');
     animateCounters();
-    loadWeather('es'); // Initialize weather data
+    loadWeather('es');
     
     // Close mobile menu if open when resizing
     window.addEventListener('resize', function() {
