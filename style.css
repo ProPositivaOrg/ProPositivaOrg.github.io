@@ -469,32 +469,126 @@ header.scrolled .language-btn.active {
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
-.loading-spinner {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-    color: var(--primary);
-    font-size: 0.9rem;
-}
-
-.error-message {
-    color: var(--accent);
-    text-align: center;
-    padding: 1rem;
-    background: rgba(211, 79, 72, 0.1);
-    border-radius: 4px;
-    margin-top: 1rem;
+.weather-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
 }
 
 .weather-card {
-    transition: all 0.3s ease;
-    position: relative;
+    background: var(--light-bg);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    overflow: hidden; /* Fix for text overflow */
 }
 
+.weather-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.weather-icon i {
+    font-size: 3rem;
+    color: var(--accent);
+}
+
+.weather-temp {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.weather-details {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.detail-item i {
+    color: var(--accent);
+    width: 20px;
+    text-align: center;
+}
+
+/* Sun/Moon Section */
+.sun-moon-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.sun-time, .moon-phase {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.time-icon, .moon-icon {
+    font-size: 1.5rem;
+    width: 30px;
+    text-align: center;
+}
+
+.time-icon i {
+    color: #FFA500; /* Sunrise color */
+}
+
+.time-icon .fa-sunset {
+    color: #FF4500; /* Sunset color */
+}
+
+.moon-icon i {
+    color: #4682B4; /* Moon color */
+}
+
+.time-info, .moon-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.time-info span:first-child,
+.moon-info span:first-child {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.time-info span:last-child,
+.moon-info span:last-child {
+    font-weight: 500;
+}
+
+.moon-icon {
+    font-size: 1.5rem;
+    width: 30px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.moon-icon span {
+    line-height: 1;
+}
+
+/* Loading states */
 .weather-card.loading {
     opacity: 0.7;
-    pointer-events: none;
+    position: relative;
 }
 
 .weather-card.loading::after {
@@ -505,6 +599,23 @@ header.scrolled .language-btn.active {
     right: 0;
     bottom: 0;
     background: rgba(255,255,255,0.7);
+}
+
+.loading-spinner {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    color: var(--primary);
+    font-size: 0.9rem;
+}
+
+.error-message {
+    padding: 1rem;
+    background: #ffebee;
+    color: #c62828;
+    border-left: 4px solid #c62828;
+    margin-bottom: 1rem;
 }
 
 /* Testimonials */
@@ -796,6 +907,67 @@ footer {
     font-size: 0.9rem;
 }
 
+/* Location Selector */
+.location-selector {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.location-dropdown {
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    border: 1px solid var(--primary);
+    background-color: white;
+    color: var(--primary);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* Surf Conditions */
+.surf-main {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.surf-icon i {
+    font-size: 2.5rem;
+    color: var(--primary);
+}
+
+.surf-details {
+    flex: 1;
+}
+
+.surf-stat {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.surf-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+.rating-stars {
+    display: flex;
+    gap: 0.2rem;
+}
+
+.rating-stars i {
+    color: var(--accent);
+    font-size: 0.9rem;
+}
+
+#surf-rating-text {
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
+}
+
 /* Responsive Design */
 @media (max-width: 992px) {
     .about-content {
@@ -866,6 +1038,18 @@ footer {
     .subscription-form .btn {
         width: 100%;
     }
+
+    .weather-details {
+        grid-template-columns: 1fr;
+    }
+    
+    .detail-item {
+        font-size: 1rem;
+    }
+    
+    .sun-moon-container {
+        gap: 1.5rem;
+    }
 }
 
 @media (max-width: 576px) {
@@ -891,217 +1075,5 @@ footer {
     
     .language-toggle {
         right: 3.5rem;
-    }
-}
-
-/* Weather Dashboard Styles */
-.weather-dashboard {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-
-.location-selector {
-    margin-bottom: 2rem;
-    text-align: center;
-}
-
-.location-dropdown {
-    padding: 0.8rem 1.5rem;
-    border-radius: 30px;
-    border: 1px solid var(--primary);
-    background-color: white;
-    color: var(--primary);
-    font-weight: 500;
-    cursor: pointer;
-}
-
-.weather-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-}
-
-.weather-card {
-    background: var(--light-bg);
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-}
-
-.weather-main {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.weather-icon i {
-    font-size: 3rem;
-    color: var(--accent);
-}
-
-.weather-temp {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: var(--primary);
-}
-
-.weather-details {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-}
-
-.detail-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
-}
-
-.detail-item i {
-    color: var(--accent);
-    width: 20px;
-    text-align: center;
-}
-
-.sun-moon-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.sun-time, .moon-phase {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.time-icon i, .moon-icon i {
-    font-size: 1.5rem;
-    color: var(--accent);
-}
-
-.time-info, .moon-info {
-    display: flex;
-    flex-direction: column;
-}
-
-.time-info span:first-child, .moon-info span:first-child {
-    font-size: 0.8rem;
-    opacity: 0.8;
-}
-
-.daylight-progress {
-    margin-top: 1.5rem;
-}
-
-.progress-label {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem;
-}
-
-.progress-bar-container {
-    height: 6px;
-    background: #e0e0e0;
-    border-radius: 3px;
-    overflow: hidden;
-}
-
-.progress-bar {
-    height: 100%;
-    background: var(--accent);
-    transition: width 0.5s ease;
-}
-
-.surf-main {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.surf-icon i {
-    font-size: 2.5rem;
-    color: var(--primary);
-}
-
-.surf-details {
-    flex: 1;
-}
-
-.surf-stat {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
-}
-
-.tide-container {
-    margin-top: 1.5rem;
-}
-
-.tide-container h4 {
-    margin-bottom: 1rem;
-    color: var(--primary);
-}
-
-.tide-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-.tide-time {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.tide-time i {
-    color: var(--accent);
-}
-
-.tide-chart {
-    margin-top: 1rem;
-    height: 80px;
-}
-
-.surf-rating {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 1.5rem;
-}
-
-.rating-stars {
-    display: flex;
-    gap: 0.2rem;
-}
-
-.rating-stars i {
-    color: var(--accent);
-    font-size: 0.9rem;
-}
-
-#surf-rating-text {
-    margin-left: 0.5rem;
-    font-size: 0.9rem;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .weather-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .weather-details {
-        grid-template-columns: 1fr;
     }
 }

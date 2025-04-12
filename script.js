@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ================== ENHANCED WEATHER FUNCTIONS ================== //
+    // ================== WEATHER FUNCTIONS ================== //
     async function loadWeather(lang = 'es') {
         // Safely get DOM elements
         const locationSelect = document.getElementById('location-select');
@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const cached = getCachedWeather();
             if (cached) {
                 updateWeatherUI(cached.weather, cached.marine, lang);
-                showWarning(lang, 'Showing cached weather');
+                showWarning(lang, lang === 'es' ? 'Mostrando datos en caché' : 'Showing cached data');
             }
         } finally {
             // Clean up loading state
@@ -263,12 +263,40 @@ document.addEventListener('DOMContentLoaded', function() {
         // Sun times
         const sunrise = new Date(weatherData.daily?.sunrise?.[0] || Date.now() + 21600000);
         const sunset = new Date(weatherData.daily?.sunset?.[0] || Date.now() + 64800000);
-        setContent('sunrise', formatTime(sunrise, lang));
-        setContent('sunset', formatTime(sunset, lang));
-
-        // Moon phase
-        const moonPhase = getMoonPhase(new Date());
-        setContent('moon-phase', lang === 'es' ? moonPhase.es : moonPhase.en);
+        
+        // Sun/Moon section with icons
+        const sunMoonContainer = document.querySelector('.sun-moon-container');
+        if (sunMoonContainer) {
+            const moonPhase = getMoonPhase(new Date());
+            sunMoonContainer.innerHTML = `
+                <div class="sun-time">
+                    <div class="time-icon">
+                        <i class="fas fa-sun" style="color: #FFA500;"></i>
+                    </div>
+                    <div class="time-info">
+                        <span>${lang === 'es' ? 'Amanecer' : 'Sunrise'}</span>
+                        <span>${formatTime(sunrise, lang)}</span>
+                    </div>
+                </div>
+                <div class="sun-time">
+                    <div class="time-icon">
+                        <i class="fas fa-moon" style="color: #4682B4;"></i>
+                    </div>
+                    <div class="time-info">
+                        <span>${lang === 'es' ? 'Atardecer' : 'Sunset'}</span>
+                        <span>${formatTime(sunset, lang)}</span>
+                    </div>
+                </div>
+                <div class="moon-phase">
+                    <div class="moon-icon">
+                        <span style="font-size: 1.5rem;">${moonPhase.emoji}</span>
+                    </div>
+                    <div class="moon-info">
+                        <span>${lang === 'es' ? 'Fase Lunar' : 'Moon Phase'}</span>
+                    </div>
+                </div>
+            `;
+        }
 
         // Marine data
         setContent('swell-height', `${marineData.hourly?.wave_height?.[0]?.toFixed(1) ?? '--'} m`);
@@ -280,51 +308,6 @@ document.addEventListener('DOMContentLoaded', function() {
             marineData.hourly?.wave_period?.[0] ?? 0
         );
         updateSurfRating(surfRating.rating, surfRating.text, lang);
-    }
-
-    function showError(lang, message) {
-        const errorMsg = message || (lang === 'es' ? 
-            'Error cargando datos meteorológicos' : 
-            'Error loading weather data');
-        
-        const errorElement = document.createElement('div');
-        errorElement.className = 'weather-error';
-        errorElement.textContent = errorMsg;
-        
-        const weatherContainer = document.getElementById('weather');
-        if (weatherContainer) {
-            weatherContainer.prepend(errorElement);
-            setTimeout(() => errorElement.remove(), 5000);
-        }
-    }
-
-    function showWarning(lang, message) {
-        const warningElement = document.createElement('div');
-        warningElement.className = 'weather-warning';
-        warningElement.textContent = message;
-        
-        const weatherContainer = document.getElementById('weather');
-        if (weatherContainer) {
-            weatherContainer.prepend(warningElement);
-            setTimeout(() => warningElement.remove(), 5000);
-        }
-    }
-    // ================== END ENHANCED WEATHER FUNCTIONS ================== //
-
-    // Rest of your existing functions remain exactly the same
-    function degToCompass(deg) {
-        const directions = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
-        const val = Math.floor((deg / 22.5) + 0.5);
-        return directions[(val % 16)];
-    }
-
-    function formatTime(date, lang) {
-        const options = { 
-            hour: 'numeric', 
-            minute: '2-digit',
-            hour12: true 
-        };
-        return date.toLocaleTimeString(lang === 'es' ? 'es-CR' : 'en-US', options);
     }
 
     function getMoonPhase(date) {
@@ -362,6 +345,51 @@ document.addEventListener('DOMContentLoaded', function() {
         ];
         
         return phases[b];
+    }
+
+    function showError(lang, message) {
+        const errorMsg = message || (lang === 'es' ? 
+            'Error cargando datos meteorológicos' : 
+            'Error loading weather data');
+        
+        const errorElement = document.createElement('div');
+        errorElement.className = 'error-message';
+        errorElement.textContent = errorMsg;
+        
+        const weatherContainer = document.getElementById('weather');
+        if (weatherContainer) {
+            weatherContainer.prepend(errorElement);
+            setTimeout(() => errorElement.remove(), 5000);
+        }
+    }
+
+    function showWarning(lang, message) {
+        const warningElement = document.createElement('div');
+        warningElement.className = 'error-message';
+        warningElement.style.background = '#fff3e0';
+        warningElement.style.borderLeft = '4px solid #ffa000';
+        warningElement.textContent = message;
+        
+        const weatherContainer = document.getElementById('weather');
+        if (weatherContainer) {
+            weatherContainer.prepend(warningElement);
+            setTimeout(() => warningElement.remove(), 5000);
+        }
+    }
+
+    function degToCompass(deg) {
+        const directions = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+        const val = Math.floor((deg / 22.5) + 0.5);
+        return directions[(val % 16)];
+    }
+
+    function formatTime(date, lang) {
+        const options = { 
+            hour: 'numeric', 
+            minute: '2-digit',
+            hour12: true 
+        };
+        return date.toLocaleTimeString(lang === 'es' ? 'es-CR' : 'en-US', options);
     }
 
     function calculateSurfRating(height, period) {

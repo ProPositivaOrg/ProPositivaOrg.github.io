@@ -9,22 +9,19 @@
     <link rel="stylesheet" href="style.css">
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="57x57" href="Assets/Logos/FavIcons/apple-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="Assets/Logos/FavIcons/apple-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="Assets/Logos/FavIcons/apple-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="Assets/Logos/FavIcons/apple-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="Assets/Logos/FavIcons/apple-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="Assets/Logos/FavIcons/apple-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="Assets/Logos/FavIcons/apple-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="Assets/Logos/FavIcons/apple-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180" href="Assets/Logos/FavIcons/apple-icon-180x180.png">
-<link rel="icon" type="image/png" sizes="192x192"  href="Assets/Logos/FavIcons/android-icon-192x192.png">
-<link rel="icon" type="image/png" sizes="32x32" href="Assets/Logos/FavIcons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96" href="Assets/Logos/FavIcons/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="16x16" href="Assets/Logos/FavIcons/favicon-16x16.png">
-<link rel="manifest" href="Assets/Logos/FavIcons/manifest.json">
-<!-- <meta name="msapplication-TileColor" content="#ffffff"> -->
-<!-- <meta name="msapplication-TileImage" content="/ms-icon-144x144.png"> -->
-<!-- <meta name="theme-color" content="#ffffff"> -->
+    <link rel="apple-touch-icon" sizes="60x60" href="Assets/Logos/FavIcons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="Assets/Logos/FavIcons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="Assets/Logos/FavIcons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="Assets/Logos/FavIcons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="Assets/Logos/FavIcons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="Assets/Logos/FavIcons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="Assets/Logos/FavIcons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="Assets/Logos/FavIcons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="Assets/Logos/FavIcons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="Assets/Logos/FavIcons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="Assets/Logos/FavIcons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="Assets/Logos/FavIcons/favicon-16x16.png">
+    <link rel="manifest" href="Assets/Logos/FavIcons/manifest.json">
     <meta name="msapplication-TileColor" content="#2F4C39">
     <meta name="theme-color" content="#2F4C39">
 </head>
@@ -260,109 +257,90 @@
     </section>
 
     <!-- Weather Dashboard -->
-<section class="section">
-    <h2 class="section-title" data-es="Condiciones para Viajar" data-en="Travel Conditions">Condiciones para Viajar</h2>
-    
-    <div class="weather-dashboard" id="weather">
-        <!-- Location Selector -->
-        <div class="location-selector">
-            <select id="location-select" class="location-dropdown">
-                <option value="9.9281,-84.0907" data-es="San José" data-en="San José">San José</option>
-                <option value="9.9763,-84.8384" data-es="Puntarenas" data-en="Puntarenas">Puntarenas</option>
-                <option value="10.0024,-83.0843" data-es="Limón" data-en="Limón">Limón</option>
-                <option value="10.6269,-85.4395" data-es="Guanacaste" data-en="Guanacaste">Guanacaste</option>
-            </select>
-            <div class="loading-spinner" id="weather-loading" style="display: none;">
-                <i class="fas fa-spinner fa-spin"></i>
-                <span data-es="Cargando datos..." data-en="Loading data...">Cargando datos...</span>
-            </div>
-        </div>
+    <section class="section">
+        <h2 class="section-title" data-es="Condiciones para Viajar" data-en="Travel Conditions">Condiciones para Viajar</h2>
         
-        <!-- Current Weather -->
-        <div class="weather-grid">
-            <!-- Current Conditions Card -->
-            <div class="weather-card current-weather">
-                <h3 data-es="Condiciones Actuales" data-en="Current Conditions">Condiciones Actuales</h3>
-                <div class="weather-main">
-                    <div class="weather-icon" id="current-icon">
-                        <i class="fas fa-sun"></i>
-                    </div>
-                    <div class="weather-temp">
-                        <span id="current-temp">--</span><span>°C</span>
-                    </div>
-                </div>
-                <div class="weather-details">
-                    <div class="detail-item">
-                        <i class="fas fa-temperature-high"></i>
-                        <span data-es="Sensación:" data-en="Feels:">Sensación:</span>
-                        <span id="feels-like">--°C</span>
-                    </div>
-                    <div class="detail-item">
-                        <i class="fas fa-tint"></i>
-                        <span data-es="Humedad:" data-en="Humidity:">Humedad:</span>
-                        <span id="humidity">--%</span>
-                    </div>
+        <div class="weather-dashboard" id="weather">
+            <div class="location-selector">
+                <select id="location-select" class="location-dropdown">
+                    <option value="9.9281,-84.0907" data-es="San José" data-en="San José">San José</option>
+                    <option value="9.9763,-84.8384" data-es="Puntarenas" data-en="Puntarenas">Puntarenas</option>
+                    <option value="10.0024,-83.0843" data-es="Limón" data-en="Limón">Limón</option>
+                    <option value="10.6269,-85.4395" data-es="Guanacaste" data-en="Guanacaste">Guanacaste</option>
+                </select>
+                <div class="loading-spinner" id="weather-loading" style="display: none;">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <span data-es="Cargando datos..." data-en="Loading data...">Cargando datos...</span>
                 </div>
             </div>
             
-            <!-- Sun/Moon Times Card -->
-            <div class="weather-card sun-times">
-                <h3 data-es="Sol y Luna" data-en="Sun & Moon">Sol y Luna</h3>
-                <div class="sun-moon-container">
-                    <div class="sun-time">
-                        <div class="time-icon">
-                            <i class="fas fa-sunrise"></i>
+            <div class="weather-grid">
+                <!-- Current Conditions Card -->
+                <div class="weather-card current-weather">
+                    <h3 data-es="Condiciones Actuales" data-en="Current Conditions">Condiciones Actuales</h3>
+                    <div class="weather-main">
+                        <div class="weather-icon" id="current-icon">
+                            <i class="fas fa-sun"></i>
                         </div>
-                        <div class="time-info">
-                            <span data-es="Amanecer" data-en="Sunrise">Amanecer</span>
-                            <span id="sunrise">--:-- AM</span>
-                        </div>
-                    </div>
-                    <div class="sun-time">
-                        <div class="time-icon">
-                            <i class="fas fa-sunset"></i>
-                        </div>
-                        <div class="time-info">
-                            <span data-es="Atardecer" data-en="Sunset">Atardecer</span>
-                            <span id="sunset">--:-- PM</span>
+                        <div class="weather-temp">
+                            <span id="current-temp">--</span><span>°C</span>
                         </div>
                     </div>
-                </div>
-            </div>
-            
-            <!-- Surf Conditions Card -->
-            <div class="weather-card surf-conditions">
-                <h3 data-es="Condiciones para Surf" data-en="Surf Conditions">Condiciones para Surf</h3>
-                <div class="surf-main">
-                    <div class="surf-icon">
-                        <i class="fas fa-water"></i>
-                    </div>
-                    <div class="surf-details">
-                        <div class="surf-stat">
-                            <span data-es="Oleaje:" data-en="Swell:">Oleaje:</span>
-                            <span id="swell-height">-- m</span>
+                    <div class="weather-details">
+                        <div class="detail-item">
+                            <i class="fas fa-temperature-high"></i>
+                            <span data-es="Sensación:" data-en="Feels:">Sensación:</span>
+                            <span id="feels-like">--°C</span>
                         </div>
-                        <div class="surf-stat">
-                            <span data-es="Período:" data-en="Period:">Período:</span>
-                            <span id="swell-period">-- s</span>
+                        <div class="detail-item">
+                            <i class="fas fa-tint"></i>
+                            <span data-es="Humedad:" data-en="Humidity:">Humedad:</span>
+                            <span id="humidity">--%</span>
                         </div>
                     </div>
                 </div>
-                <div class="surf-rating">
-                    <span data-es="Condiciones:" data-en="Conditions:">Condiciones:</span>
-                    <div class="rating-stars">
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <span id="surf-rating-text">--</span>
+                
+                <!-- Sun/Moon Times Card -->
+                <div class="weather-card sun-times">
+                    <h3 data-es="Sol y Luna" data-en="Sun & Moon">Sol y Luna</h3>
+                    <div class="sun-moon-container">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Surf Conditions Card -->
+                <div class="weather-card surf-conditions">
+                    <h3 data-es="Condiciones para Surf" data-en="Surf Conditions">Condiciones para Surf</h3>
+                    <div class="surf-main">
+                        <div class="surf-icon">
+                            <i class="fas fa-water"></i>
+                        </div>
+                        <div class="surf-details">
+                            <div class="surf-stat">
+                                <span data-es="Oleaje:" data-en="Swell:">Oleaje:</span>
+                                <span id="swell-height">-- m</span>
+                            </div>
+                            <div class="surf-stat">
+                                <span data-es="Período:" data-en="Period:">Período:</span>
+                                <span id="swell-period">-- s</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="surf-rating">
+                        <span data-es="Condiciones:" data-en="Conditions:">Condiciones:</span>
+                        <div class="rating-stars">
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span id="surf-rating-text">--</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- News Section -->
     <section id="news" class="section news-section">
@@ -497,7 +475,7 @@
         </div>
     </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
