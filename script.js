@@ -21,6 +21,50 @@ const API_CONFIG = {
     }
 };
 
+const MAP_CONFIG = {
+    tileLayer: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    costaRicaCenter: [9.7489, -83.7534],
+    zoom: 7,
+    locations: [
+        {
+            name: "San José",
+            position: [9.9281, -84.0907],
+            impact: 15200,
+            projects: 12,
+            type: "completed"
+        },
+        {
+            name: "Puntarenas",
+            position: [9.9763, -84.8384],
+            impact: 8700,
+            projects: 8,
+            type: "completed"
+        },
+        {
+            name: "Limón",
+            position: [10.0024, -83.0843],
+            impact: 6800,
+            projects: 5,
+            type: "progress"
+        },
+        {
+            name: "Guanacaste",
+            position: [10.6269, -85.4395],
+            impact: 10500,
+            projects: 7,
+            type: "completed"
+        },
+        {
+            name: "Cartago",
+            position: [9.8644, -83.9194],
+            impact: 4200,
+            projects: 3,
+            type: "progress"
+        }
+    ]
+};
+
 const WEATHER_ICONS = {
     0: 'fas fa-sun', // Clear sky
     1: 'fas fa-cloud-sun', // Mainly clear
@@ -88,6 +132,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Reload dynamic content
         loadWeather(lang);
         loadNews(lang);
+        
+        // Re-render map with new language
+        if (document.getElementById('impact-map')) {
+            document.getElementById('impact-map').innerHTML = '';
+            initImpactMap(lang);
+        }
     }
 
     // Initialize language buttons
@@ -131,6 +181,67 @@ document.addEventListener('DOMContentLoaded', function() {
                 counter.innerText = target.toLocaleString();
             }
         });
+    }
+
+    // Impact Map Initialization
+    function initImpactMap(lang = 'es') {
+        // Check if map container exists
+        if (!document.getElementById('impact-map')) return;
+        
+        // Create map instance
+        const map = L.map('impact-map').setView(MAP_CONFIG.costaRicaCenter, MAP_CONFIG.zoom);
+        
+        // Add tile layer
+        L.tileLayer(MAP_CONFIG.tileLayer, {
+            attribution: MAP_CONFIG.attribution
+        }).addTo(map);
+
+        // Marker cluster group
+        const markers = L.markerClusterGroup();
+        
+        // Custom icons
+        const completedIcon = L.divIcon({
+            html: '<i class="fas fa-map-marker-alt" style="color: #2F4C39; font-size: 2rem;"></i>',
+            className: 'custom-marker'
+        });
+        
+        const progressIcon = L.divIcon({
+            html: '<i class="fas fa-map-marker-alt" style="color: #D34F48; font-size: 2rem;"></i>',
+            className: 'custom-marker'
+        });
+
+        // Add markers for each location
+        MAP_CONFIG.locations.forEach(location => {
+            const marker = L.marker(location.position, {
+                icon: location.type === "completed" ? completedIcon : progressIcon
+            });
+            
+            marker.bindPopup(`
+                <div class="map-popup">
+                    <h4>${location.name}</h4>
+                    <p><strong>${lang === 'es' ? 'Personas beneficiadas' : 'People benefited'}:</strong> ${location.impact.toLocaleString()}</p>
+                    <p><strong>${lang === 'es' ? 'Proyectos' : 'Projects'}:</strong> ${location.projects}</p>
+                    <p><strong>${lang === 'es' ? 'Estado' : 'Status'}:</strong> ${lang === 'es' ? 
+                        (location.type === "completed" ? "Completado" : "En progreso") : 
+                        (location.type === "completed" ? "Completed" : "In progress")}</p>
+                </div>
+            `);
+            
+            markers.addLayer(marker);
+        });
+        
+        map.addLayer(markers);
+        
+        // Add country border (simplified)
+        const costaRicaBorder = L.polygon([
+            [11.2167, -85.6167], [11.2167, -82.5667], [8.0333, -82.5667], 
+            [8.0333, -85.6167], [11.2167, -85.6167]
+        ], {
+            color: "#2F4C39",
+            weight: 2,
+            opacity: 0.5,
+            fillOpacity: 0.1
+        }).addTo(map);
     }
 
     // ================== WEATHER FUNCTIONS ================== //
@@ -543,6 +654,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loadNews('es');
     animateCounters();
     loadWeather('es');
+    initImpactMap('es');
     
     // Close mobile menu if open when resizing
     window.addEventListener('resize', function() {
@@ -552,133 +664,3 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
-// Add these to your existing script.js
-
-// First, add these to your existing API_CONFIG object
-const MAP_CONFIG = {
-    tileLayer: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    costaRicaCenter: [9.7489, -83.7534],
-    zoom: 7,
-    locations: [
-        {
-            name: "San José",
-            position: [9.9281, -84.0907],
-            impact: 15200,
-            projects: 12,
-            type: "completed"
-        },
-        {
-            name: "Puntarenas",
-            position: [9.9763, -84.8384],
-            impact: 8700,
-            projects: 8,
-            type: "completed"
-        },
-        {
-            name: "Limón",
-            position: [10.0024, -83.0843],
-            impact: 6800,
-            projects: 5,
-            type: "progress"
-        },
-        {
-            name: "Guanacaste",
-            position: [10.6269, -85.4395],
-            impact: 10500,
-            projects: 7,
-            type: "completed"
-        },
-        {
-            name: "Cartago",
-            position: [9.8644, -83.9194],
-            impact: 4200,
-            projects: 3,
-            type: "progress"
-        }
-    ]
-};
-
-// Add this function to initialize the map
-function initImpactMap(lang = 'es') {
-    // Create map instance
-    const map = L.map('impact-map').setView(MAP_CONFIG.costaRicaCenter, MAP_CONFIG.zoom);
-    
-    // Add tile layer
-    L.tileLayer(MAP_CONFIG.tileLayer, {
-        attribution: MAP_CONFIG.attribution
-    }).addTo(map);
-
-    // Marker cluster group
-    const markers = L.markerClusterGroup();
-    
-    // Custom icons
-    const completedIcon = L.divIcon({
-        html: '<i class="fas fa-map-marker-alt" style="color: #2F4C39; font-size: 2rem;"></i>',
-        className: 'custom-marker'
-    });
-    
-    const progressIcon = L.divIcon({
-        html: '<i class="fas fa-map-marker-alt" style="color: #D34F48; font-size: 2rem;"></i>',
-        className: 'custom-marker'
-    });
-
-    // Add markers for each location
-    MAP_CONFIG.locations.forEach(location => {
-        const marker = L.marker(location.position, {
-            icon: location.type === "completed" ? completedIcon : progressIcon
-        });
-        
-        marker.bindPopup(`
-            <div class="map-popup">
-                <h4>${location.name}</h4>
-                <p><strong>${lang === 'es' ? 'Personas beneficiadas' : 'People benefited'}:</strong> ${location.impact.toLocaleString()}</p>
-                <p><strong>${lang === 'es' ? 'Proyectos' : 'Projects'}:</strong> ${location.projects}</p>
-                <p><strong>${lang === 'es' ? 'Estado' : 'Status'}:</strong> ${lang === 'es' ? 
-                    (location.type === "completed" ? "Completado" : "En progreso") : 
-                    (location.type === "completed" ? "Completed" : "In progress")}</p>
-            </div>
-        `);
-        
-        markers.addLayer(marker);
-    });
-    
-    map.addLayer(markers);
-    
-    // Add country border (simplified)
-    const costaRicaBorder = L.polygon([
-        [11.2167, -85.6167], [11.2167, -82.5667], [8.0333, -82.5667], 
-        [8.0333, -85.6167], [11.2167, -85.6167]
-    ], {
-        color: "#2F4C39",
-        weight: 2,
-        opacity: 0.5,
-        fillOpacity: 0.1
-    }).addTo(map);
-}
-
-// Update your existing DOMContentLoaded function to call initImpactMap
-document.addEventListener('DOMContentLoaded', function() {
-    // ... (all your existing code)
-    
-    // Initialize the map after setting language
-    setLanguage('es');
-    loadNews('es');
-    animateCounters();
-    loadWeather('es');
-    initImpactMap('es');
-    
-    // ... (rest of your existing code)
-});
-
-// Update language function to re-render map
-function setLanguage(lang) {
-    // ... (your existing setLanguage code)
-    
-    // Re-render map with new language
-    if (document.getElementById('impact-map')) {
-        document.getElementById('impact-map').innerHTML = '';
-        initImpactMap(lang);
-    }
-}
