@@ -269,17 +269,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Add country border (simplified)
-    const costaRicaBorder = L.polygon([
-        [11.2167, -85.6167], [11.2167, -82.5667], [8.0333, -82.5667], 
-        [8.0333, -85.6167], [11.2167, -85.6167]
-    ], {
-        color: "#2F4C39",
-        weight: 2,
-        opacity: 0.5,
-        fillOpacity: 0.1
-    }).addTo(map);
-
     // Add zoom controls with better position
     L.control.zoom({
         position: 'topright'
