@@ -1077,3 +1077,68 @@ footer {
         right: 3.5rem;
     }
 }
+
+/* Impact Map Styles */
+.impact-map-container {
+    margin-top: 3rem;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+#impact-map {
+    height: 500px;
+    width: 100%;
+    border-radius: 8px;
+    margin: 1rem 0;
+    border: 1px solid #e0e0e0;
+}
+
+.map-legend {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legend-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+/* Marker cluster styles */
+.marker-cluster-small {
+    background-color: rgba(47, 76, 57, 0.6);
+}
+.marker-cluster-small div {
+    background-color: rgba(47, 76, 57, 0.8);
+}
+
+.marker-cluster-medium {
+    background-color: rgba(211, 79, 72, 0.6);
+}
+.marker-cluster-medium div {
+    background-color: rgba(211, 79, 72, 0.8);
+}
+
+.marker-cluster-large {
+    background-color: rgba(231, 198, 151, 0.6);
+}
+.marker-cluster-large div {
+    background-color: rgba(231, 198, 151, 0.8);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #impact-map {
+        height: 350px;
+    }
+}
