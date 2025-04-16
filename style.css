@@ -1196,11 +1196,7 @@ footer {
     color: #333 !important;
 }
 
-/* Ensure header stays above map */
-header {
-    z-index: 1000;
-    position: relative;
-}
+
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
