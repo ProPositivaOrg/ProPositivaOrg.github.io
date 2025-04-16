@@ -183,66 +183,108 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Impact Map Initialization
-    function initImpactMap(lang = 'es') {
-        // Check if map container exists
-        if (!document.getElementById('impact-map')) return;
-        
-        // Create map instance
-        const map = L.map('impact-map').setView(MAP_CONFIG.costaRicaCenter, MAP_CONFIG.zoom);
-        
-        // Add tile layer
-        L.tileLayer(MAP_CONFIG.tileLayer, {
-            attribution: MAP_CONFIG.attribution
-        }).addTo(map);
+ function initImpactMap(lang = 'es') {
+    // Check if map container exists
+    if (!document.getElementById('impact-map')) return;
+    
+    // Create map instance with minimalist style
+    const map = L.map('impact-map', {
+        zoomControl: false,
+        attributionControl: false
+    }).setView(MAP_CONFIG.costaRicaCenter, MAP_CONFIG.zoom);
 
-        // Marker cluster group
-        const markers = L.markerClusterGroup();
-        
-        // Custom icons
-        const completedIcon = L.divIcon({
-            html: '<i class="fas fa-map-marker-alt" style="color: #2F4C39; font-size: 2rem;"></i>',
-            className: 'custom-marker'
-        });
-        
-        const progressIcon = L.divIcon({
-            html: '<i class="fas fa-map-marker-alt" style="color: #D34F48; font-size: 2rem;"></i>',
-            className: 'custom-marker'
-        });
+    // Add minimalist base tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: MAP_CONFIG.attribution,
+        maxZoom: 18,
+    }).addTo(map);
 
-        // Add markers for each location
-        MAP_CONFIG.locations.forEach(location => {
-            const marker = L.marker(location.position, {
-                icon: location.type === "completed" ? completedIcon : progressIcon
-            });
-            
-            marker.bindPopup(`
-                <div class="map-popup">
-                    <h4>${location.name}</h4>
-                    <p><strong>${lang === 'es' ? 'Personas beneficiadas' : 'People benefited'}:</strong> ${location.impact.toLocaleString()}</p>
-                    <p><strong>${lang === 'es' ? 'Proyectos' : 'Projects'}:</strong> ${location.projects}</p>
-                    <p><strong>${lang === 'es' ? 'Estado' : 'Status'}:</strong> ${lang === 'es' ? 
-                        (location.type === "completed" ? "Completado" : "En progreso") : 
-                        (location.type === "completed" ? "Completed" : "In progress")}</p>
+    // Custom icon class using your logo
+    const LogoPin = L.DivIcon.extend({
+        options: {
+            className: 'logo-pin',
+            iconSize: [40, 40],
+            iconAnchor: [20, 40],
+            popupAnchor: [0, -40]
+        }
+    });
+
+    // Create a custom icon with your logo
+    function createCustomIcon(type) {
+        const color = type === "completed" ? "#2F4C39" : "#D34F48";
+        return new LogoPin({
+            html: `
+                <div style="
+                    width: 40px;
+                    height: 40px;
+                    background: white;
+                    border-radius: 50%;
+                    border: 2px solid ${color};
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 5px;
+                ">
+                    <img src="Assets/Logos/Asopropositiva 2025 logotipo.png" 
+                         style="width: 100%; height: auto; object-fit: contain;">
                 </div>
-            `);
-            
-            markers.addLayer(marker);
+            `
+        });
+    }
+
+    // Add markers for each location
+    MAP_CONFIG.locations.forEach(location => {
+        const marker = L.marker(location.position, {
+            icon: createCustomIcon(location.type)
         });
         
-        map.addLayer(markers);
+        marker.bindPopup(`
+            <div class="map-popup" style="
+                padding: 1rem;
+                font-family: 'Montserrat', sans-serif;
+                color: #333;
+            ">
+                <h4 style="
+                    margin: 0 0 0.5rem 0;
+                    color: ${location.type === "completed" ? "#2F4C39" : "#D34F48"};
+                ">${location.name}</h4>
+                <p style="margin: 0.3rem 0;"><strong>${lang === 'es' ? 'Personas beneficiadas' : 'People benefited'}:</strong> ${location.impact.toLocaleString()}</p>
+                <p style="margin: 0.3rem 0;"><strong>${lang === 'es' ? 'Proyectos' : 'Projects'}:</strong> ${location.projects}</p>
+                <p style="margin: 0.3rem 0;"><strong>${lang === 'es' ? 'Estado' : 'Status'}:</strong> 
+                    <span style="color: ${location.type === "completed" ? "#2F4C39" : "#D34F48"}">
+                        ${lang === 'es' ? 
+                            (location.type === "completed" ? "Completado" : "En progreso") : 
+                            (location.type === "completed" ? "Completed" : "In progress")}
+                    </span>
+                </p>
+            </div>
+        `);
         
-        // Add country border (simplified)
-        const costaRicaBorder = L.polygon([
-            [11.2167, -85.6167], [11.2167, -82.5667], [8.0333, -82.5667], 
-            [8.0333, -85.6167], [11.2167, -85.6167]
-        ], {
-            color: "#2F4C39",
-            weight: 2,
-            opacity: 0.5,
-            fillOpacity: 0.1
-        }).addTo(map);
-    }
+        marker.addTo(map);
+        
+        // Add tooltip on hover
+        marker.bindTooltip(location.name, {
+            permanent: false,
+            direction: 'top'
+        });
+    });
+    
+    // Add country border (simplified)
+    const costaRicaBorder = L.polygon([
+        [11.2167, -85.6167], [11.2167, -82.5667], [8.0333, -82.5667], 
+        [8.0333, -85.6167], [11.2167, -85.6167]
+    ], {
+        color: "#2F4C39",
+        weight: 2,
+        opacity: 0.5,
+        fillOpacity: 0.1
+    }).addTo(map);
+
+    // Add zoom controls with better position
+    L.control.zoom({
+        position: 'topright'
+    }).addTo(map);
+}
 
     // ================== WEATHER FUNCTIONS ================== //
     async function loadWeather(lang = 'es') {
